@@ -23,11 +23,11 @@ class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
           listener: (context, state) {
             if (state is AddNoteSuccess) {
               Navigator.pop(context);
-            } 
+            }
           },
           builder: (context, state) {
             return AbsorbPointer(
-              absorbing: state is AddNoteLoading ? true : false ,
+              absorbing: state is AddNoteLoading ? true : false,
               child: Padding(
                 padding: EdgeInsets.only(
                     left: 16,

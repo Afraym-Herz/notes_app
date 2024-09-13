@@ -14,9 +14,8 @@ class NoteItem extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) {
-              return  EditNoteView( note : note);
+            MaterialPageRoute(builder: (context) {
+              return EditNoteView(note: note);
             }),
           );
         },
@@ -38,14 +37,15 @@ class NoteItem extends StatelessWidget {
                           color: Colors.black.withOpacity(0.4), fontSize: 20)),
                 ),
                 trailing: IconButton(
-                    onPressed: () {
-                      note.delete();
-                      BlocProvider.of<NotesCubit>(context).fetchAllData();
-                    },
-                    icon: const Icon(
-                      Icons.delete,
-                      size: 24,
-                    )),
+                  onPressed: () {
+                    note.delete();
+                    BlocProvider.of<NotesCubit>(context).fetchAllData();
+                  },
+                  icon: const Icon(
+                    Icons.delete,
+                    size: 24,
+                  ),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 24),

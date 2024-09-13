@@ -1,10 +1,10 @@
 # Add Note Cubit 
 
-## Add Note Cubit State 
+## Add Note Cubit States
 
 they are AddNoteInitial , AddNoteSuccess , AddNoteLoading and AddNoteFailure
 
-they represents all States Add note Function , and these states will use in cubit 
+they represents all States Add note Cubit , and these states will use in cubit 
 
 
 ## Add Note Cubit (Function) 
@@ -20,6 +20,26 @@ after it will try to initilize the box from Hive to storage NoteModelS (notesBox
 we will use add from notesBox to add note and emit (SuccessState) 
 
 if happen any error will emit(FaliureState) with its error message
+
+-------------------------
+
+
+# Notes Cubit 
+
+
+## Notes Cubit States
+
+they are NotesInitial , NotesSuccess , NotesLoading and NotesFailure
+
+they represents all States note Cubit , and these states will use in cubit 
+
+## Notes Cubit 'fetch all data' (Function)
+
+this Function is used to fetch the data from storage and update the views or the lists which contain the Notes
+
+we create null-able list (notes) and pointer (hiveBox) to reverse the hiveBox which contains the notes 
+
+we convert the value in the hiveBox to list and put it in notes and emit the NotesSuccess with the notesList to refresh and update the NotesList in anywhere 
 
 
 ---------------------------
@@ -81,10 +101,14 @@ we use BlocProvider class to call of<> (context) Function this determine from an
    #### Listner 
     Reacts to state changes without rebuilding the UI. The listener callback is triggered whenever a new state is emitted
 
+    in Listner if the add NoteSuccess was emited the addNoteBottomSheet will pop from screen 
+
    #### Builder
     Rebuilds the UI based on the state. This is where the main UI rendering logic is placed.
-    
 
+    in the Builder we use AbsorbPointer this widget use to stop the pointer of user when emit NotesLoading
+
+    we put the AddNoteForm in padding but in bottom padding we use MediaQuery.of(context).viewInsets.bottom to give us the size of the keyboard will shown in the bottom so when the keyboard will shown the padding widget will give the AddNoteForm padding from the bottom so to up the AddNoteForm when the padding get and allow Scroll to the form if it has many of field , we use SingleChildScrollView 
 
 
 -------------------------------
@@ -101,4 +125,13 @@ we use BlocProvider class to call of<> (context) Function this determine from an
 
 3 - title used to show primary content in ListTile and subTitle used to display additional content 
 
-4 - trailing used to put icon in the right of the listTile and we can put another widgets by child of container
+4 - trailing used to put icon in the right of the listTile and we can put another widgets by child of container 
+in our case we put delete (IconButton)
+
+
+## Logic of Delete
+
+1 - in its onPressed , we use the delete method to delete node from storage and the delete method that we get it by extends the Hive object to the NoteModel 
+
+2 - after we delete the note from the storage we refresh and update the notesList by fetchAllData (NotesCubit)
+
